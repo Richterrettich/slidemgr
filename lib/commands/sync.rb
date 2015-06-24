@@ -13,18 +13,18 @@ class Sync < Thor::Group
            :desc => 'The presentation name',
            :required => false
 
-  def syn
+  def sync
 
     block = Proc.new do | master,client |
       puts "syncing content for #{File.basename(master)}"
       FileUtils.cp_r "#{master}/content/",
-                     "#{client}/content/"
+                     "#{client}/"
     end
 
     @name ? presentation(@name.sub(' ','_'),&block) : each_presentation(&block)
 
     if git_repository?
-      puts 'syncing wiht git...'
+      puts 'syncing with git...'
       add_to_git
     end
   end

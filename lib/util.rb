@@ -82,7 +82,7 @@ module Util
     g = Git.open content_root
     g.add(:all=>true)
     g.commit('autocommit')
-    g.push(g.remote('origin'),opts = {force: true}) if has_remote?(g)
+    g.push(g.remote('origin'),'master',force: true) if has_remote?(g)
 
   rescue Git::GitExecuteError => error
     puts error.message.split(":")[1]
